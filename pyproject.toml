@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rag-thesis"
+version = "1.0.0"
+description = "RAG-Pipeline zur Transformation unstrukturierter PDF-Vorlesungsskripte in faktentreue Lern- und Prüfungsmaterialien (Bachelorarbeit)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Max Kail" }]
+keywords = ["rag", "llm", "evaluation", "design-science-research", "education"]
+
+dependencies = [
+    "openai>=1.40",
+    "tenacity>=8.2",
+    "pydantic>=2.5",
+    "chromadb>=0.5",
+    "pymupdf>=1.24",
+    "pymupdf4llm>=0.0.17",
+    "pillow>=10.0",
+    "python-dotenv>=1.0",
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "pandas>=2.0",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6", "pyright>=1.1.350"]
+
+[project.scripts]
+rag-pipeline = "rag_thesis.cli:run_pipeline"
+
+[tool.setuptools]
+packages = ["rag_thesis"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.pyright]
+include = ["rag_thesis", "tests"]
+pythonVersion = "3.9"
+typeCheckingMode = "standard"
